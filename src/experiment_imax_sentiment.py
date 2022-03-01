@@ -42,7 +42,7 @@ class RunExperiment:
 
     def run_training_epoch(self, params, train_dl, optimizer, epoch):
 
-        RSL_PATH= '~/results'
+        RSL_PATH= '/content/protoinfomax/results'
         
         model = self.model
         idx2word = params['idx2word']
@@ -193,7 +193,7 @@ class RunExperiment:
 
     def project_data(self, idx_, dev_dl, idx2word, epoch, str_):
 
-        RSL_PATH= '~/encodeds/imax'
+        RSL_PATH= '/content/protoinfomax/encodeds/imax'
 
         model = self.model
 
@@ -237,7 +237,7 @@ class RunExperiment:
 
     def project_data_continue(self, i, dat, domain, idx2word, epoch, str_):
 
-        RSL_PATH= '~/encodeds/imaxg'
+        RSL_PATH= '/content/protoinfomax/encodeds/imaxg'
 
         model = self.model
 

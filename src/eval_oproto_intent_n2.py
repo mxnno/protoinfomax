@@ -27,7 +27,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
 import nltk
-nltk.data.path.append("~/nltk_data/")
+nltk.data.path.append("/content/nltk_data/")
 import re
 import string
 
@@ -84,7 +84,7 @@ def load_w2v():
     word_vecs_new = []
     zeros_init = [float(0.)] * 100
 
-    model = Word2Vec.load('~/embeddings/w2v_fasttext_intent.model')
+    model = Word2Vec.load('/content/protoinfomax/embeddings/w2v_fasttext_intent.model')
     vocab = list(model.wv.vocab)
     word_vecs = model.wv.vectors
     w2v = model.wv
@@ -483,8 +483,8 @@ class AmazonLoader(Dataset):
 def eval_model(params, model, experiment, optimizer, epoch):
 
     TEST_FILE_INDEX = 2
-    DATA_PATH = '~/data'
-    RSL_PATH = '~/results'
+    DATA_PATH = '/content/protoinfomax/data'
+    RSL_PATH = '/content/protoinfomax/results'
 
     _, dev_data, test_data = read_pickle(DATA_PATH, 'tr_dev_te_intent.pkl')
 
@@ -635,7 +635,7 @@ if __name__ == '__main__':
 
 
     voc, w2v = load_w2v()
-    word2idx, idx2word = read_pickle('~/data/', 'dict_idx2word_intent.pkl')
+    word2idx, idx2word = read_pickle('/content/protoinfomax/data/', 'dict_idx2word_intent.pkl')
 
     params['vocabulary'] = word2idx
     params['voclist'] = idx2word
@@ -649,9 +649,9 @@ if __name__ == '__main__':
         optimizer = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), 1e-3)
 
         if ep =='best':
-            checkpoint = torch.load(os.path.join('~/results/', 'oproto_intent_k100.best.pth'), map_location=lambda storage, loc: storage)
+            checkpoint = torch.load(os.path.join('/content/protoinfomax/results/', 'oproto_intent_k100.best.pth'), map_location=lambda storage, loc: storage)
         else:
-            checkpoint = torch.load(os.path.join('~/results/', 'oproto_intent_k100_%s.pth'%ep), map_location=lambda storage, loc: storage)
+            checkpoint = torch.load(os.path.join('/content/protoinfomax/results/', 'oproto_intent_k100_%s.pth'%ep), map_location=lambda storage, loc: storage)
 
         model.load_state_dict(checkpoint['state_dict'])
 

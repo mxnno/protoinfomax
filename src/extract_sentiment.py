@@ -27,7 +27,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 
 
 import nltk
-nltk.data.path.append("~/nltk_data/")
+nltk.data.path.append("/content/nltk_data/")
 import re
 import string
 
@@ -139,7 +139,7 @@ def extract_topn_from_vector(feature_names, sorted_items, topn=10):
 def get_all_data():
 
     xdat = []
-    PATH = '~/data/AmazonDat/'
+    PATH = '/content/protoinfomax/data/AmazonDat/'
 
     print("Processing Apps_for_Android ...")
     sys.stdout.flush()
@@ -232,7 +232,7 @@ def training_w2v(data):
     print("Training Word Embeddings...")
 
 
-    model = load_facebook_model('~/embeddings/cc.en.100.bin')
+    model = load_facebook_model('/content/protoinfomax/embeddings/cc.en.100.bin')
 
     oldmodel = deepcopy(model)
 
@@ -242,7 +242,7 @@ def training_w2v(data):
    
     model.build_vocab(data, update=True)
     model.train(data, total_examples=n_sents, epochs=20)
-    model.save('~/embeddings/w2v_fasttext_sentiment.model')
+    model.save('/content/protoinfomax/embeddings/w2v_fasttext_sentiment.model')
 
     for m in ['oldmodel', 'model']:
         print('The vocabulary size of the w2v_fasttext_cls', m, 'is', len(eval(m).wv.vocab))
@@ -256,7 +256,7 @@ def load_w2v(PATH):
     word_vecs_new = []
     zeros_init = [float(0.)] * 100
 
-    model = Word2Vec.load('~/embeddings/w2v_fasttext_sentiment.model')
+    model = Word2Vec.load('/content/protoinfomax/embeddings/w2v_fasttext_sentiment.model')
     vocab = list(model.wv.vocab)
     word_vecs = model.wv.vectors
     w2v = model.wv
@@ -365,8 +365,8 @@ def extract_kws(PATH, domain, params):
     base=os.path.basename(path)
     fn = os.path.splitext(base)[0]
 
-    np.savetxt('~/data/Amazondat/train/Kws_%s.train'%fn, df.values, fmt='%s', delimiter='\t')
-Amazondat/
+    np.savetxt('/content/protoinfomax/data/Amazondat/train/Kws_%s.train'%fn, df.values, fmt='%s', delimiter='\t')
+#Amazondat/
 
 
 
@@ -402,7 +402,7 @@ if __name__ == '__main__':
 
     idx2word = dict([(i, voc[i]) for i in range(len(voc))])
     word2idx = dict([(v,k) for k,v in idx2word.items()])
-    save_pickle('~/data/dict_idx2word_sentiment.pkl', (word2idx, idx2word))
+    save_pickle('/content/protoinfomax/data/dict_idx2word_sentiment.pkl', (word2idx, idx2word))
 
 
     params['vocabulary'] = word2idx
@@ -413,7 +413,7 @@ if __name__ == '__main__':
 
     # Keyword extraction
     
-    stopwords=get_stop_words("~/data/stopwords.txt")
+    stopwords=get_stop_words("/content/protoinfomax/data/stopwords.txt")
 
     
     cv=CountVectorizer(max_df=0.85,stop_words=stopwords)
@@ -425,7 +425,7 @@ if __name__ == '__main__':
     tfidf_transformer=TfidfTransformer(smooth_idf=True,use_idf=True)
     tfidf_transformer.fit(word_count_vector)
 
-    save_pickle('~/embeddings/tfidf_sparse_vec_cls.pkl', (cv, word_count_vector, tfidf_transformer))
+    save_pickle('/content/protoinfomax/embeddings/tfidf_sparse_vec_cls.pkl', (cv, word_count_vector, tfidf_transformer))
 
 
     params["cv"] = cv

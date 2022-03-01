@@ -26,7 +26,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
 import nltk
-nltk.data.path.append("~/nltk_data/")
+nltk.data.path.append("/content/nltk_data/")
 import re
 import string
 
@@ -112,7 +112,7 @@ def load_w2v():
     word_vecs_new = []
     zeros_init = [float(0.)] * 100
 
-    model = Word2Vec.load('~/embeddings/w2v_fasttext_intent.model')
+    model = Word2Vec.load('/content/protoinfomax/embeddings/w2v_fasttext_intent.model')
     vocab = list(model.wv.vocab)
     word_vecs = model.wv.vectors
     w2v = model.wv
@@ -569,8 +569,8 @@ class AmazonLoader(Dataset):
 def eval_model(params, model, experiment, optimizer, epoch):
 
     TEST_FILE_INDEX = 2
-    DATA_PATH = '~/data'
-    RSL_PATH = '~/results'
+    DATA_PATH = '/content/protoinfomax/data'
+    RSL_PATH = '/content/protoinfomax/results'
 
     _, dev_data, test_data = read_pickle(DATA_PATH, 'tr_dev_te_kw_intent.pkl')
 
@@ -719,7 +719,7 @@ if __name__ == '__main__':
     sys.stdout.flush()
 
     voc, w2v = load_w2v()
-    word2idx, idx2word = read_pickle('~/data/', 'dict_idx2word_intent.pkl')
+    word2idx, idx2word = read_pickle('/content/protoinfomax/data/', 'dict_idx2word_intent.pkl')
 
 
     params['vocabulary'] = word2idx
@@ -728,7 +728,7 @@ if __name__ == '__main__':
     params["word2idx"] = word2idx
     params["idx2word"] = idx2word
 
-    cv, word_count_vector, tfidf_transformer = read_pickle('~/embeddings/', 'tfidf_sparse_vec_intent.pkl')
+    cv, word_count_vector, tfidf_transformer = read_pickle('/content/protoinfomax/embeddings/', 'tfidf_sparse_vec_intent.pkl')
     params["cv"] = cv
     params["tfidf_transformer"] = tfidf_transformer
 
@@ -738,9 +738,9 @@ if __name__ == '__main__':
         optimizer = optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), 1e-3)
 
         if ep =='best':
-            checkpoint = torch.load(os.path.join('~/results/', 'imax_kw_intent_k100.best.pth'), map_location=lambda storage, loc: storage)
+            checkpoint = torch.load(os.path.join('/content/protoinfomax/results/', 'imax_kw_intent_k100.best.pth'), map_location=lambda storage, loc: storage)
         else:
-            checkpoint = torch.load(os.path.join('~/results/', 'imax_kw_intent_k100_%s.pth'%ep), map_location=lambda storage, loc: storage)
+            checkpoint = torch.load(os.path.join('/content/protoinfomax/results/', 'imax_kw_intent_k100_%s.pth'%ep), map_location=lambda storage, loc: storage)
 
         model.load_state_dict(checkpoint['state_dict'])
 

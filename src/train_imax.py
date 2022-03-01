@@ -22,7 +22,7 @@ import math
 import random
 
 import nltk
-nltk.data.path.append("~/nltk_data/")
+nltk.data.path.append("/content/nltk_data/")
 import re
 import string
 
@@ -106,7 +106,7 @@ def load_w2v(PATH):
     word_vecs_new = []
     zeros_init = [float(0.)] * 100
 
-    model = Word2Vec.load('~/embeddings/w2v_fasttext_sentiment.model')
+    model = Word2Vec.load('/content/protoinfomax/embeddings/w2v_fasttext_sentiment.model')
     vocab = list(model.wv.vocab)
     word_vecs = model.wv.vectors
     w2v = model.wv
@@ -516,8 +516,8 @@ class AmazonLoader(Dataset):
 def train_model(params, model, experiment, optimizer):
 
     TEST_FILE_INDEX = 2
-    DATA_PATH = '~/data'
-    RSL_PATH = '~/results'
+    DATA_PATH = '/content/protoinfomax/data'
+    RSL_PATH = '/content/protoinfomax/results'
 
     
     train_data = get_data(params,
@@ -605,7 +605,7 @@ if __name__ == '__main__':
     sys.stdout.flush()
 
     voc, w2v = load_w2v()
-    word2idx, idx2word = read_pickle('~/data/', 'dict_idx2word_sentiment.pkl')
+    word2idx, idx2word = read_pickle('/content/protoinfomax/data/', 'dict_idx2word_sentiment.pkl')
 
 
     params['vocabulary'] = word2idx
