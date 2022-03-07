@@ -314,7 +314,7 @@ def finetuning_intent(data):
 
 
 # scripts for loading pretrained word embedding model
-def load_w2v_sentiment(PATH):
+def load_w2v_sentiment():
 
     vocab_new = []
     word_vecs_new = []
@@ -349,7 +349,7 @@ def load_w2v_sentiment(PATH):
     return vocab_new, word_vecs_new
 
 
-def load_w2v_intent(PATH):
+def load_w2v_intent():
 
     vocab_new = []
     word_vecs_new = []
