@@ -11,14 +11,14 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
-from workspace.workspace_cls import SENT_WORDID, SENT_LABELID, SENT_WORD_MASK, SENT_ORIGINAL_TXT
+from workspace_cls import SENT_WORDID, SENT_LABELID, SENT_WORD_MASK, SENT_ORIGINAL_TXT
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SubsetRandomSampler
 import argparse
-from basic_utils.utils_torch_cls import compute_values, get_data
+from utils_torch_cls import compute_values, get_data
 from experiment_proto_sentiment import RunExperiment
-from workspace.workspace_cls import workspace
-from models.model_proto_sentiment import *
-from basic_utils.vocabulary_cls import get_word_info
+from workspace_cls import workspace
+from model_proto_sentiment import *
+from vocabulary_cls import get_word_info
 import math
 import random
 
@@ -28,7 +28,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 
 
 import nltk
-nltk.data.path.append(NLTK_PATH)
+nltk.data.path.append("/content/nltk_data/")
 import re
 import string
 
@@ -556,7 +556,7 @@ def train_model(params, model, experiment, optimizer):
 
 if __name__ == '__main__':
 
-    EBD_PATH = HOME_DIR+'/embeddings/'
+    EBD_PATH = '/content/protoinfomax/'+/embeddings/'
     RSL_PATH= HOME_DIR+'/results/'
 
     MAIN_PATH = HOME_DIR

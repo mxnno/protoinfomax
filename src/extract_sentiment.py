@@ -250,7 +250,7 @@ def training_w2v(data):
 
 
 
-def load_w2v(PATH):
+def load_w2v():
 
     vocab_new = []
     word_vecs_new = []
@@ -365,7 +365,7 @@ def extract_kws(PATH, domain, params):
     base=os.path.basename(path)
     fn = os.path.splitext(base)[0]
 
-    np.savetxt('/content/protoinfomax/data/Amazondat/train/Kws_%s.train'%fn, df.values, fmt='%s', delimiter='\t')
+    np.savetxt('/content/protoinfomax/data/AmazonDat/train/Kws_%s.train'%fn, df.values, fmt='%s', delimiter='\t')
 #Amazondat/
 
 
@@ -393,7 +393,7 @@ if __name__ == '__main__':
     sys.stdout.flush()
 
     data = get_all_data()
-    save_pickle('./', 'data/sentiment_traindat.pkl', data)
+    save_pickle('/content/protoinfomax/data/', 'sentiment_traindat.pkl', data)
     
     # Continue training word2vec on sentiment data
     training_w2v(data)
@@ -402,7 +402,7 @@ if __name__ == '__main__':
 
     idx2word = dict([(i, voc[i]) for i in range(len(voc))])
     word2idx = dict([(v,k) for k,v in idx2word.items()])
-    save_pickle('/content/protoinfomax/data/dict_idx2word_sentiment.pkl', (word2idx, idx2word))
+    save_pickle('/content/protoinfomax/data/','dict_idx2word_sentiment.pkl', (word2idx, idx2word))
 
 
     params['vocabulary'] = word2idx
@@ -425,7 +425,7 @@ if __name__ == '__main__':
     tfidf_transformer=TfidfTransformer(smooth_idf=True,use_idf=True)
     tfidf_transformer.fit(word_count_vector)
 
-    save_pickle('/content/protoinfomax/embeddings/tfidf_sparse_vec_cls.pkl', (cv, word_count_vector, tfidf_transformer))
+    save_pickle('/content/protoinfomax/embeddings/', 'tfidf_sparse_vec_cls.pkl', (cv, word_count_vector, tfidf_transformer))
 
 
     params["cv"] = cv
@@ -434,6 +434,6 @@ if __name__ == '__main__':
     domains = ['Apps_for_Android.train', 'Beauty.train', 'CDs_and_Vinyl.train', 'Books.train', 'Cell_Phones_and_Accessories.train', 'Clothing_Shoes_and_Jewelry.train', 'Electronics.train', 'Health_and_Personal_Care.train', 'Home_and_Kitchen.train', 'Kindle_Store.train', 'Movies_and_TV.train', 'Office_Products.train', 'Sports_and_Outdoors.train']
 
     for d in domains:
-        extract_kws('./', 'data/Amazondat/train/'+d, params)
+        extract_kws('/content/protoinfomax/', 'data/AmazonDat/train/'+d, params)
   
       

@@ -11,14 +11,14 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
-from workspace.workspace_intent import SENT_WORDID, SENT_LABELID, SENT_WORD_MASK, SENT_ORIGINAL_TXT
+from workspace_intent import SENT_WORDID, SENT_LABELID, SENT_WORD_MASK, SENT_ORIGINAL_TXT
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SubsetRandomSampler
 import argparse
-from basic_utils.utils_torch_intent import compute_values, get_data, compute_values_eval
+from utils_torch_intent import compute_values, get_data, compute_values_eval
 from experiment_proto_intent import RunExperiment
-from workspace.workspace_intent import workspace
-from models.model_proto_intent import *
-from basic_utils.vocabulary_intent import get_word_info
+from workspace_intent import workspace
+from model_proto_intent import *
+from vocabulary_intent import get_word_info
 import math
 import random
 
@@ -27,7 +27,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
 import nltk
-nltk.data.path.append(NLTK_PATH)
+nltk.data.path.append("/content/nltk_data/")
 import re
 import string
 
@@ -555,7 +555,7 @@ def train_test_model(params, model, experiment, optimizer):
 
 if __name__ == '__main__':
 
-    EBD_PATH = HOME_DIR+'/embeddings/'
+    EBD_PATH = '/content/protoinfomax/'+/embeddings/'
     RSL_PATH= HOME_DIR+'/results/'
 
     MAIN_PATH = HOME_DIR

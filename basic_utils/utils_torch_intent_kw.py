@@ -2,8 +2,8 @@ import os
 import sys
 sys.path.append(os.getcwd())
 import math
-#from workspace_intent_kw import workspace
-from workspace.workspace_intent_kw2 import workspace
+from workspace_intent_kw import workspace
+#from workspace_intent_kw2 import workspace
 import numpy as np
 from utils.cal_methods import HistogramBinning, TemperatureScaling, evaluate, cal_results
 

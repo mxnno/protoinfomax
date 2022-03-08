@@ -11,14 +11,14 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
-from workspace.workspace_intent_kw import SENT_WORDID, SENT_LABELID, SENT_WORD_MASK, SENT_ORIGINAL_TXT, KWS_IDS, KWS_IDF
+from workspace_intent_kw import SENT_WORDID, SENT_LABELID, SENT_WORD_MASK, SENT_ORIGINAL_TXT, KWS_IDS, KWS_IDF
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SubsetRandomSampler
 import argparse
-from basic_utils.utils_torch_intent_kw import compute_values, get_data, compute_values_eval
+from utils_torch_intent_kw import compute_values, get_data, compute_values_eval
 from experiment_imax_kw_intent import RunExperiment
-from workspace.workspace_intent_kw import workspace
-from models.model_imax_kw_intent import *
-from basic_utils.vocabulary_intent import get_word_info
+from workspace_intent_kw import workspace
+from model_imax_kw_intent import *
+from vocabulary_intent import get_word_info
 import math
 import random
 
@@ -26,7 +26,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
 import nltk
-nltk.data.path.append(NLTK_PATH)
+nltk.data.path.append("/content/nltk_data/")
 import re
 import string
 
@@ -643,8 +643,9 @@ def train_kw_model(params, model, experiment, optimizer):
 
 if __name__ == '__main__':
 
-    EBD_PATH = HOME_DIR+'/embeddings/'
-    RSL_PATH= HOME_DIR+'/results/'
+    DATA_PATH = '/content/protoinfomax/data/'
+    EBD_PATH = '/content/protoinfomax/data/embeddings/'
+    RSL_PATH= '/content/protoinfomax/results/'
 
     MAIN_PATH = HOME_DIR
 
@@ -667,8 +668,8 @@ if __name__ == '__main__':
     print('Parameters:', params)
     sys.stdout.flush()
 
-    voc, w2v = load_w2v(MAIN_PATH)
-    word2idx, idx2word = read_pickle(EBD_PATH, 'dict_idx2word_intent.pkl')
+    voc, w2v = load_w2v(EBD_PATH)
+    word2idx, idx2word = read_pickle(DATA_PATH, 'dict_idx2word_intent.pkl')
 
 
     params['vocabulary'] = word2idx
@@ -677,7 +678,8 @@ if __name__ == '__main__':
     params["word2idx"] = word2idx
     params["idx2word"] = idx2word
 
-    cv, word_count_vector, tfidf_transformer = read_pickle(EBD_PATH, 'tfidf_sparse_vec_intent.pkl')
+    #cv, word_count_vector, tfidf_transformer = read_pickle(EBD_PATH, 'tfidf_sparse_vec_intent.pkl')
+    cv, word_count_vector, tfidf_transformer = read_pickle(EBD_PATH, 'tfidf_sparse_vec_cls.pkl')
     params["cv"] = cv
     params["tfidf_transformer"] = tfidf_transformer
    

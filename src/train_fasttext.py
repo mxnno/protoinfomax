@@ -462,7 +462,7 @@ def extract_kws(PATH, domain, params):
     base=os.path.basename(path)
     fn = os.path.splitext(base)[0]
 
-    np.savetxt('/content/protoinfomax/data/Amazondat/train/Kws_%s.train'%fn, df.values, fmt='%s', delimiter='\t')
+    np.savetxt('/content/protoinfomax/data/AmazonDat/train/Kws_%s.train'%fn, df.values, fmt='%s', delimiter='\t')
 #Amazondat/
 
 
@@ -498,7 +498,7 @@ if __name__ == '__main__':
 
     idx2word = dict([(i, voc[i]) for i in range(len(voc))])
     word2idx = dict([(v,k) for k,v in idx2word.items()])
-    save_pickle('/content/protoinfomax/data/dict_idx2word_sentiment.pkl', (word2idx, idx2word))
+    save_pickle('/content/protoinfomax/data/', 'dict_idx2word_sentiment.pkl', (word2idx, idx2word))
 
 
     data_intent = get_intentdata()
@@ -510,6 +510,6 @@ if __name__ == '__main__':
 
     idx2word = dict([(i, voc[i]) for i in range(len(voc))])
     word2idx = dict([(v,k) for k,v in idx2word.items()])
-    save_pickle('/content/protoinfomax/data/dict_idx2word_intent.pkl', (word2idx, idx2word))
+    save_pickle('/content/protoinfomax/data/', 'dict_idx2word_intent.pkl', (word2idx, idx2word))
 
       
